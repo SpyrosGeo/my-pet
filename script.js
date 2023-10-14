@@ -38,20 +38,22 @@ class CanvasAnimator {
 
         const animationConfig = {
             idle: new AnimationAttributes(6, 0, 5),
-            jump: new AnimationAttributes(6, 1, 2),
             run: new AnimationAttributes(8, 3, 6),
             dizzy: new AnimationAttributes(10, 4, 12),
             sit: new AnimationAttributes(4, 5, 10),
             playDead: new AnimationAttributes(12, 8, 20)
         };
 
-        this.selectedAnimation = 'idle';
-        this.currentAnimation = new BaseAnimation(animationConfig[this.selectedAnimation]);
+        this.animationRadios = document.querySelectorAll('.hidden-radio');
 
-        this.animationButtons = document.querySelectorAll('.animation-button');
-        this.animationButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                this.selectedAnimation = event.target.getAttribute('data-animation');
+        this.selectedAnimation = document.querySelector('.hidden-radio:checked').value;
+        this.currentAnimation = this.selectedAnimation === 'playDead' ?
+            new PlayDeadAnimation(animationConfig[this.selectedAnimation]) :
+            new BaseAnimation(animationConfig[this.selectedAnimation]);
+
+        this.animationRadios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                this.selectedAnimation = event.target.value;
                 this.currentAnimation = this.selectedAnimation === 'playDead' ?
                     new PlayDeadAnimation(animationConfig[this.selectedAnimation]) :
                     new BaseAnimation(animationConfig[this.selectedAnimation]);
