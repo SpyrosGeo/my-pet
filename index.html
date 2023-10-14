@@ -9,13 +9,24 @@
     <title>My pet</title>
 </head>
 <body>
-    <div id="animation-buttons">
-        <button class="animation-button" data-animation="idle">Idle</button>
-        <button class="animation-button" data-animation="run">Run</button>
-        <button class="animation-button" data-animation="dizzy">Dizzy</button>
-        <button class="animation-button" data-animation="sit">Sit</button>
-        <button class="animation-button" data-animation="playDead">Play Dead</button>
+    <div id="container">
+        <div id="animation-buttons">
+            <input type="radio" name="animation" id="idle" value="idle" class="hidden-radio" checked>
+            <label for="idle" class="animation-button">Idle</label>
+
+            <input type="radio" name="animation" id="run" value="run" class="hidden-radio">
+            <label for="run" class="animation-button">Run</label>
+
+            <input type="radio" name="animation" id="dizzy" value="dizzy" class="hidden-radio">
+            <label for="dizzy" class="animation-button">Dizzy</label>
+
+            <input type="radio" name="animation" id="sit" value="sit" class="hidden-radio">
+            <label for="sit" class="animation-button">Sit</label>
+
+            <input type="radio" name="animation" id="playDead" value="playDead" class="hidden-radio">
+            <label for="playDead" class="animation-button">Play Dead</label>
+        </div>
+        <canvas id="canvas1"></canvas>
     </div>
-    <canvas id="canvas1"></canvas>
 </body>
 </html>
