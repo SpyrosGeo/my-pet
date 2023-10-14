@@ -19,7 +19,7 @@ class BaseAnimation {
 
 class PlayDeadAnimation extends BaseAnimation {
     updateFrame() {
-        this.frameX = this.frameX >= this.attributes.frames - 1 ? 5 : this.frameX + 1;
+        this.frameX = this.frameX >= this.attributes.frames - 1 ? 9 : this.frameX + 1;
     }
 }
 
@@ -43,7 +43,7 @@ class CanvasAnimator {
             run: new AnimationAttributes(8, 3, 6),
             dizzy: new AnimationAttributes(10, 4, 12),
             sit: new AnimationAttributes(4, 5, 10),
-            playDead: new AnimationAttributes(12, 8, 9)
+            playDead: new AnimationAttributes(12, 8, 20)
         };
 
         this.selectedAnimation = this.selector.value;
