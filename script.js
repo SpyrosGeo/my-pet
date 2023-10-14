@@ -24,10 +24,9 @@ class PlayDeadAnimation extends BaseAnimation {
 }
 
 class CanvasAnimator {
-    constructor(canvasId, selectorId, spriteDimensions, imageSources) {
+    constructor(canvasId, spriteDimensions, imageSources) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext("2d");
-        this.selector = document.getElementById(selectorId);
         this.spriteWidth = spriteDimensions.width;
         this.spriteHeight = spriteDimensions.height;
         this.gameFrame = 0;
@@ -46,16 +45,17 @@ class CanvasAnimator {
             playDead: new AnimationAttributes(12, 8, 20)
         };
 
-        this.selectedAnimation = this.selector.value;
-        this.currentAnimation = this.selectedAnimation === 'playDead' ?
-            new PlayDeadAnimation(animationConfig[this.selectedAnimation]) :
-            new BaseAnimation(animationConfig[this.selectedAnimation]);
+        this.selectedAnimation = 'idle';
+        this.currentAnimation = new BaseAnimation(animationConfig[this.selectedAnimation]);
 
-        this.selector.addEventListener('change', (event) => {
-            this.selectedAnimation = event.target.value;
-            this.currentAnimation = this.selectedAnimation === 'playDead' ?
-                new PlayDeadAnimation(animationConfig[this.selectedAnimation]) :
-                new BaseAnimation(animationConfig[this.selectedAnimation]);
+        this.animationButtons = document.querySelectorAll('.animation-button');
+        this.animationButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                this.selectedAnimation = event.target.getAttribute('data-animation');
+                this.currentAnimation = this.selectedAnimation === 'playDead' ?
+                    new PlayDeadAnimation(animationConfig[this.selectedAnimation]) :
+                    new BaseAnimation(animationConfig[this.selectedAnimation]);
+            });
         });
 
         this.canvas.width = 600;
@@ -96,5 +96,5 @@ class CanvasAnimator {
 const spriteDimensions = { width: 575, height: 523 };
 const imageSources = { pet: 'shadow_dog.png', background: 'background.jpeg' };
 
-const animator = new CanvasAnimator("canvas1", "animation", spriteDimensions, imageSources);
+const animator = new CanvasAnimator("canvas1", spriteDimensions, imageSources);
 animator.animate();
